@@ -1,0 +1,22 @@
+[user]
+	name = thdubois
+	email = thomas.duboisrouvray@silabs.com
+[safe]
+	directory = *
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	subm = submodule update --init --recursive
+	mbranch = ! git for-each-ref --format=' %(authorname) %09 %(refname)' --sort=authorname | grep thdubois
+	pr = ! git pull --rebase --prune
+	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+	rename = "! git branch -m  ; git push origin :; git push --set-upstream origin "
+	lbranch = for-each-ref --format=' %(authorname) %09 %(refname)' --sort=authorname
+	s = status
+	ss = ! git stash save
+	sa = ! git stash apply
+	fadded = log --diff-filter=A --follow
